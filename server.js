@@ -44,9 +44,7 @@ app.get("/all", all);
 // Post Route
 app.post("/weather", (req, res) => {
   newEntry = {
-    temp: req.body.main.temp,
-    facts: req.body.main.feels_like,
-    hot: req.body
+    temp: req.body.main.temp
   };
   projectData.push(newEntry);
   console.log(projectData);
