@@ -7,7 +7,7 @@ const date = document.getElementById("date");
 const content = document.getElementById("content");
 
 // Personal API Key for OpenWeatherMap API
-const apiKey = "&units=metric&APPID=e3d02ea1a9fad9177d217738809587cd";
+const apiKey = "e3d02ea1a9fad9177d217738809587cd";
 
 // Create a new date instance dynamically with JS
 let d = new Date();
@@ -19,7 +19,8 @@ document.getElementById("generate").addEventListener("click", preformAction);
 /* Function called by event listener */
 function preformAction(event) {
   const newCity = city.value;
-  const weather = getWeather(baseUrl, newCity, apiKey)
+  const metric = newCity + "&units=metric&APPID=";
+  const weather = getWeather(baseUrl, metric, apiKey)
     .then(function(data) {
       postData("/weather", data);
     })
@@ -64,12 +65,11 @@ const updateUi = async () => {
   const request = await fetch("/all");
   try {
     const allData = await request.json();
-    // set up a loop for all entry
-    for (let i = 0; i < allData.length; i++) {
-      temp.innerHTML = `current temp is: ${allData[i].temp}&deg`;
-    }
-
+    // display current temp in celsius
+    temp.innerHTML = `current temp is: ${allData.temp}&deg`;
+    // display the date
     date.innerHTML = `Date: ${newDate}`;
+    // display user feelings
     content.innerHTML = `Feeling: ${feelings.value}`;
   } catch (err) {
     console.log("Error", err);

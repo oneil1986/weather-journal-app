@@ -31,7 +31,7 @@ const listening = () => {
 const server = app.listen(port, listening);
 
 // Setup empty JS object to act as endpoint for all routes
-let projectData = [];
+const projectData = {};
 
 // Callback function to complete GET '/all'
 const all = (req, res) => {
@@ -43,9 +43,6 @@ app.get("/all", all);
 
 // Post Route
 app.post("/weather", (req, res) => {
-  newEntry = {
-    temp: req.body.main.temp
-  };
-  projectData.push(newEntry);
+  projectData.temp = req.body.main.temp;
   console.log(projectData);
 });
